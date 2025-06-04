@@ -1,286 +1,841 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wajahat Ahmad | Portfolio</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0a0a0a;
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #111;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0, 255, 150, 0.15);
-    }
-
-    header h1 {
-      font-size: 1.7rem;
-      color: #00ffc8;
-    }
-
-    nav a {
-      color: #eee;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #00ffc8;
-    }
-
-    .hero {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 90vh;
-      text-align: center;
-      flex-direction: column;
-      background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
-      animation: fadeIn 2s ease-in;
-    }
-
-    .hero h2 {
-      color: #00ffc8;
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .typing {
-      color: #b3ffec;
-      font-size: 1.5rem;
-      height: 2rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 0.15em solid #00ffc8;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: #00ffc8; }
-    }
-
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
-    }
-
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h2 {
-      color: #00ffc8;
-      margin-bottom: 1.2rem;
-      font-size: 1.8rem;
-    }
-
-    .item {
-      background-color: #151515;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-left: 3px solid #00ffc8;
-      box-shadow: 0 0 10px rgba(0, 255, 150, 0.1);
-      border-radius: 8px;
-    }
-
-    .item h3 {
-      color: #b3ffec;
-      font-size: 1.2rem;
-    }
-
-    .sub {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-bottom: 0.5rem;
-    }
-
-    .tools {
-      font-size: 0.85rem;
-      color: #ccc;
-      margin-top: 0.3rem;
-    }
-
-    ul {
-      margin-left: 1.5rem;
-      list-style-type: square;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #333;
-    }
-
-    a {
-      color: #00ffc8;
-    }
-
-    @media (max-width: 600px) {
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wajahat Ahmad | Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#a5b4fc',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    animation: {
+                        'wave': 'wave 2.5s infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        wave: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '10%': { transform: 'rotate(14deg)' },
+                            '20%': { transform: 'rotate(-8deg)' },
+                            '30%': { transform: 'rotate(14deg)' },
+                            '40%': { transform: 'rotate(-4deg)' },
+                            '50%': { transform: 'rotate(10deg)' },
+                            '60%': { transform: 'rotate(0deg)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            border-radius: 2px;
+            background-color: #e2e8f0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            background-color: #4f46e5;
+            transition: width 1s ease-in-out;
+        }
+        
+        .wave {
+            display: inline-block;
+            animation: wave 2.5s infinite;
+            transform-origin: 70% 70%;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #a5b4fc);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .tech-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            filter: drop-shadow(0 5px 10px rgba(79, 70, 229, 0.4));
+        }
+        
+        .blob {
+            background: linear-gradient(to right, #4f46e5, #a5b4fc);
+            border-radius: 50% 30% 70% 40% / 60% 40% 70% 30%;
+        }
+        
+        .testimonial-card {
+            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px -15px rgba(79, 70, 229, 0.4);
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Wajahat Ahmad</h1>
-    <nav>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-sm dark:bg-gray-900/90 shadow-sm transition-colors duration-300" id="header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary dark:text-secondary">Wajahati</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link hover:text-primary dark:hover:text-secondary transition">Home</a>
+                <a href="#about" class="nav-link hover:text-primary dark:hover:text-secondary transition">About</a>
+                <a href="#experience" class="nav-link hover:text-primary dark:hover:text-secondary transition">Experience</a>
+                <a href="#skills" class="nav-link hover:text-primary dark:hover:text-secondary transition">Skills</a>
+                <a href="#projects" class="nav-link hover:text-primary dark:hover:text-secondary transition">Projects</a>
+                <a href="#contact" class="nav-link hover:text-primary dark:hover:text-secondary transition">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i class="uil uil-moon text-xl dark:hidden"></i>
+                    <i class="uil uil-sun text-xl hidden dark:block"></i>
+                </button>
+                <button id="menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i class="uil uil-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
+            <div class="flex flex-col py-4">
+                <a href="#home" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Home</a>
+                <a href="#about" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">About</a>
+                <a href="#experience" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Experience</a>
+                <a href="#skills" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Skills</a>
+                <a href="#projects" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Projects</a>
+                <a href="#contact" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
+            </div>
+        </div>
+    </header>
 
-  <section class="hero">
-    <h2>Hi, I'm Wajahat Ahmad</h2>
-    <div class="typing" id="typed-text"></div>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen pt-32 pb-16 flex items-center">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi<span class="wave">👋</span>, I'm Wajahat Ahmad</h1>
+                <div class="text-xl md:text-2xl mb-6">
+                    <span>I'm a </span>
+                    <span id="typed-text" class="font-bold text-primary dark:text-secondary"></span>
+                </div>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl">
+                    Software Engineer specializing in distributed systems, full-stack development, and creating solutions that scale.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="px-8 py-3 bg-primary hover:bg-indigo-700 text-white font-medium rounded-full shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="uil uil-message"></i> Contact Me
+                    </a>
+                    <a href="#projects" class="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-full shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="uil uil-scenery"></i> View Projects
+                    </a>
+                </div>
+                <div class="mt-10 flex justify-center md:justify-start gap-6">
+                    <a href="https://github.com/wajahati" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
+                        <i class="uil uil-github-alt text-2xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/wajahati-ahmad/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
+                        <i class="uil uil-linkedin-alt text-2xl"></i>
+                    </a>
+                    <a href="" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
+                        <i class="uil uil-twitter-alt text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hidden md:flex justify-center">
+				<div class="w-80 h-80 md:w-80 md:h-80 rounded-full floating flex items-center justify-center overflow-hidden blob">
+					<div class="w-64 h-64 flex items-center justify-center shadow-2xl rounded-full overflow-hidden bg-white dark:bg-gray-800">
+						<img src="profile.png" alt="Profile Image" class="w-full h-full object-contain" />
+					</div>
+				</div>	
+			</div>
+        </div>
+    </section>
 
-  <section id="experience">
-    <h2>Professional Experience</h2>
-    <div class="item">
-      <h3>Software Engineer – Alachisoft</h3>
-      <p class="sub">July 2023 – September 2024</p>
-      <ul>
-        <li>Developed Pub/Sub messaging architecture like Apache Kafka within NCache.</li>
-        <li>Implemented client-server features: message publishing & polling.</li>
-        <li>Built state transfer mechanisms to ensure distributed data consistency.</li>
-        <li>Debugged networking/state transfer issues for cluster performance.</li>
-      </ul>
-      <p class="tools">Tech: C#, .NET Core, ASP.NET, Java, Apache Kafka, NCache</p>
-    </div>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">About Me</h2>
+            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex justify-center">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-50 h-64 md:w-55 md:h-80">
+					    <img src="cartoonpic.jpg" alt="Profile Image" class="w-full h-full object-contain rounded-xl" />
+					</div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Wajahat Ahmad</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Software Engineer specializing in distributed systems and full-stack development, passionate about building scalable and efficient solutions. Currently pursuing a Master's in Computer Science at UCLouvain, Belgium.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+                            <div class="text-3xl font-bold text-primary dark:text-secondary">3+</div>
+                            <div class="text-gray-500 dark:text-gray-400">Years Experience</div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+                            <div class="text-3xl font-bold text-primary dark:text-secondary">20+</div>
+                            <div class="text-gray-500 dark:text-gray-400">Projects</div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
+                            <div class="text-3xl font-bold text-primary dark:text-secondary">5</div>
+                            <div class="text-gray-500 dark:text-gray-400">Certificates</div>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center px-6 py-3 bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 text-white rounded-full transition font-medium shadow">
+                        <i class="uil uil-download-alt mr-2"></i> Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="item">
-      <h3>ZAROORAT</h3>
-      <ul>
-        <li>Mobile commerce app with in-app messaging.</li>
-        <li>ML features for category prediction, price suggestion & filtering.</li>
-      </ul>
-      <p class="tools">React Native, Python, FastAPI, Firebase, Heroku</p>
-    </div>
-  </section>
+    <!-- Experience & Education -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Experience & Education</h2>
+            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
+            
+			
+			
+            <div class="max-w-4xl mx-auto space-y-12">
+			
+			    
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/3 md:text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2024 - Present</span>
+                        <div class="text-lg font-bold mt-2">UCLouvain</div>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <h3 class="text-xl font-bold">Masters in Computer Science</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Majoring in Software Engineering and Artificial Intelligence. Currently pursuing advanced studies in distributed computing and machine learning.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/3 md:text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2023 - 2024</span>
+                        <div class="text-lg font-bold mt-2">Alachisoft</div>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <h3 class="text-xl font-bold">Software Engineer</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Developed a Pub/Sub messaging system architecture similar to Apache Kafka, integrated with NCache's in-memory distributed cluster.
+                            Implemented client-server features like message publishing and polling, ensuring stability in distributed caching.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">C#</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">.NET</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Apache Kafka</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Distributed Systems</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/3 md:text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2022</span>
+                        <div class="text-lg font-bold mt-2">RadicalX</div>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <h3 class="text-xl font-bold">Product Development Intern</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Developed and integrated a frontend extension using React, improving the RadicalX website's user interface.
+                            Built and optimized backend infrastructure using Firebase for scalable data storage.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">React</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Firebase</span>
+                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+          
+                
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/3 md:text-right pr-8">
+                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2019 - 2023</span>
+                        <div class="text-lg font-bold mt-2">COMSATS University</div>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <h3 class="text-xl font-bold">BSc in Computer Science</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">
+                            Bachelor of Science in Computer Science with a focus on software development and database systems. 
+                            Completed coursework in algorithms, data structures, web development, and computer networks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <div class="item">
-      <h3>UCLouvain – Master of Science in Computer Science</h3>
-      <p class="sub">September 2024 – Present</p>
-      <p>Majoring in Software Engineering and AI</p>
-    </div>
-  </section>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Technical Skills</h2>
+            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
+            
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="uil uil-brackets-curly text-primary dark:text-secondary text-xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Frontend Development</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>HTML/CSS</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>JavaScript</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>React</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="uil uil-server-network text-primary dark:text-secondary text-xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Backend Development</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>C#/.NET</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Python</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Node.js</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="uil uil-database text-primary dark:text-secondary text-xl mr-3"></i>
+                        <h3 class="text-xl font-bold">Databases</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>MySQL</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>MongoDB</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Firebase</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <i class="uil uil-clouds text-primary dark:text-secondary text-xl mr-3"></i>
+                        <h3 class="text-xl font-bold">DevOps & Others</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Docker</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>CI/CD</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Git</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Programming:</strong> C#, .NET, ASP.NET, Java, React, Python, FastAPI</li>
-      <li><strong>Distributed Systems:</strong> Apache Kafka, NCache, Clustering, State Transfer</li>
-      <li><strong>Databases:</strong> MongoDB, MySQL, Firebase</li>
-      <li><strong>Development:</strong> Full-Stack, API Integration, Frontend & Backend</li>
-      <li><strong>Tools:</strong> Git, Heroku, Cloud Deployment</li>
-    </ul>
-  </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Projects</h2>
+            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
+            
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center">
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">ZAROORAT</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                    Mobile commerce app with in-app messaging, machine learning for category prediction, price suggestions, and profanity filtering.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">React Native</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Python</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">FastAPI</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-link mr-1"></i> Live Demo
+                                    </a>
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-github mr-1"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center">
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">EcoGuide</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                    Search feature with basic functionality and advanced system using vector databases for semantic queries.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">.NET</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">MongoDB</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Vector DB</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-link mr-1"></i> Live Demo
+                                    </a>
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-github mr-1"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
+                            <div class="h-48 bg-gray-200 flex items-center justify-center">
+                                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">STICKER.pk</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                    E-commerce platform with category-based search, shopping cart, and admin panel for advertisement management.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">PHP</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Laravel</span>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">MySQL</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-link mr-1"></i> Live Demo
+                                    </a>
+                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
+                                        <i class="uil uil-github mr-1"></i> Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p><strong>Email:</strong> <a href="mailto:ahmadwajahat312@gmail.com">ahmadwajahat312@gmail.com</a></p>
-    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com">LinkedIn Profile</a></p>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In Touch</h2>
+            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
+            
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                                <i class="uil uil-envelope text-primary dark:text-secondary text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Email</h4>
+                                <p class="text-gray-600 dark:text-gray-300">ahmadwajahat312@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+								<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+									<a href="https://www.linkedin.com/in/wajahati-ahmad/" class="hover:text-white transition">			
+										<i class="uil uil-linkedin-alt text-primary dark:text-secondary text-xl"></i>
+									</a>								
+								</div>
+								<div class="ml-4">
+									<h4 class="font-medium">LinkedIn</h4>
+									<p class="text-gray-600 dark:text-gray-300">linkedin.com/in/wajahati-ahmad/</p>
+								</div>
+                        </div>
+                        
+                        <div class="flex">
+								<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+									<a href="https://github.com/wajahati" class="hover:text-white transition">
+										<i class="uil uil-github text-primary dark:text-secondary text-xl"></i>			
+									</a>
+								</div>
+								<div class="ml-4">
+									<h4 class="font-medium">GitHub</h4>
+									<p class="text-gray-600 dark:text-gray-300">github.com/wajahati</p>
+								</div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                                <i class="uil uil-map-marker text-primary dark:text-secondary text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Location</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Belgium</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                       <h4 class="text-lg font-medium mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
+                                <i class="uil uil-twitter-alt text-xl"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
+                                <i class="uil uil-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
+                                <i class="uil uil-dribbble text-xl"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
+                                <i class="uil uil-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <form class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
+                        <h3 class="text-xl font-bold mb-4">Send a Message</h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1" for="name">Full Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1" for="subject">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1" for="message">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 bg-primary hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2">
+                            <i class="uil uil-message"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>© 2025 Wajahat Ahmad. All rights reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-800 dark:bg-gray-900 text-gray-400">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="text-2xl font-bold text-white">Wajahat Ahmad</div>
+                    <p class="mt-2">Software Engineer & Full-Stack Developer</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white transition">
+                        <i class="uil uil-twitter-alt text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/wajahati-ahmad/" class="hover:text-white transition">
+                        <i class="uil uil-linkedin-alt text-xl"></i>
+                    </a>
+                    <a href="https://github.com/wajahati" class="hover:text-white transition">
+                        <i class="uil uil-github-alt text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition">
+                        <i class="uil uil-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+                <p>&copy; 2025 Wajahat Ahmad. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script>
-    // Typing effect
-    const phrases = [
-      "I am a Software Engineer.",
-      "I'm passionate about Machine Learning.",
-      "Currently studying at UCLouvain."
-    ];
+    <!-- Scroll to Top -->
+    <a href="#" id="scroll-top" class="fixed right-8 bottom-8 w-12 h-12 rounded-full bg-primary dark:bg-secondary flex items-center justify-center text-white shadow-lg opacity-0 invisible transition-all">
+        <i class="uil uil-arrow-up text-xl"></i>
+    </a>
 
-    const typedText = document.getElementById("typed-text");
-    let i = 0, j = 0, currentPhrase = [], isDeleting = false;
-
-    function type() {
-      typedText.innerHTML = currentPhrase.join("");
-      if (i < phrases.length) {
-        if (!isDeleting && j <= phrases[i].length) {
-          currentPhrase.push(phrases[i][j++]);
-        } else if (isDeleting && j > 0) {
-          currentPhrase.pop();
-          j--;
-        }
-
-        if (j === phrases[i].length) isDeleting = true;
-        if (isDeleting && j === 0) {
-          currentPhrase = [];
-          isDeleting = false;
-          i = (i + 1) % phrases.length;
-        }
-        setTimeout(type, isDeleting ? 50 : 100);
-      }
-    }
-    document.addEventListener("DOMContentLoaded", type);
-
-    // Fade in sections
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll("section").forEach(section => {
-      observer.observe(section);
-    });
-  </script>
+    <script>
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Swiper
+            const swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    }
+                }
+            });
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+            
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            if (localStorage.getItem('dark') === 'true') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('dark', 'true');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
+            });
+            
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link-mobile').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scroll-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.remove('opacity-0', 'invisible');
+                    scrollTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    scrollTopBtn.classList.add('opacity-0', 'invisible');
+                    scrollTopBtn.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            // Set active nav link on scroll
+            window.addEventListener('scroll', setActiveNavLink);
+            
+            function setActiveNavLink() {
+                const sections = document.querySelectorAll('section');
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
+                    link.classList.remove('text-primary', 'dark:text-secondary', 'font-medium');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('text-primary', 'dark:text-secondary', 'font-medium');
+                    }
+                });
+            }
+            
+            // Set progress bar widths
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+            
+            // Initialize typed.js effect
+            const typedText = document.getElementById('typed-text');
+            let roles = ['Software Engineer', 'Full-Stack Developer', 'Distributed Systems Expert', 'Problem Solver'];
+            let currentRoleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function typeEffect() {
+                const currentText = roles[currentRoleIndex];
+                
+                if (!isDeleting) {
+                    typedText.textContent = currentText.substring(0, charIndex++);
+                    if (charIndex > currentText.length) {
+                        isDeleting = true;
+                        setTimeout(typeEffect, 1500);
+                        return;
+                    }
+                } else {
+                    typedText.textContent = currentText.substring(0, charIndex--);
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+                    }
+                }
+                
+                setTimeout(typeEffect, isDeleting ? 50 : 150);
+            }
+            
+            typeEffect();
+        });
+    </script>
 </body>
 </html>
