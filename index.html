@@ -1,880 +1,448 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wajahat Ahmad | Software Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4f46e5',
-                        secondary: '#a5b4fc',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
-                    },
-                    animation: {
-                        'wave': 'wave 2.5s infinite',
-                        'float': 'float 6s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        wave: {
-                            '0%, 100%': { transform: 'rotate(0deg)' },
-                            '10%': { transform: 'rotate(14deg)' },
-                            '20%': { transform: 'rotate(-8deg)' },
-                            '30%': { transform: 'rotate(14deg)' },
-                            '40%': { transform: 'rotate(-4deg)' },
-                            '50%': { transform: 'rotate(10deg)' },
-                            '60%': { transform: 'rotate(0deg)' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body.dark-mode {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        
-        .progress-bar {
-            height: 4px;
-            border-radius: 2px;
-            background-color: #e2e8f0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            border-radius: 2px;
-            background-color: #4f46e5;
-            transition: width 1s ease-in-out;
-        }
-        
-        .wave {
-            display: inline-block;
-            animation: wave 2.5s infinite;
-            transform-origin: 70% 70%;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed, #a5b4fc);
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .tech-icon {
-            transition: all 0.3s ease;
-        }
-        
-        .tech-icon:hover {
-            transform: translateY(-5px) scale(1.1);
-            filter: drop-shadow(0 5px 10px rgba(79, 70, 229, 0.4));
-        }
-        
-        .blob {
-            background: linear-gradient(to right, #4f46e5, #a5b4fc);
-            border-radius: 50% 30% 70% 40% / 60% 40% 70% 30%;
-        }
-        
-        .testimonial-card {
-            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px -15px rgba(79, 70, 229, 0.4);
-        }
-        
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Name — Backend Engineer</title>
+    <meta name="description" content="Backend Engineer portfolio — modern UI, unique animations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Optional: Google font (safe, lightweight). Remove if you want fully offline -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+<body>
+    <!-- Progress -->
+    <div class="progress" aria-hidden="true">
+        <div class="progress__bar"></div>
+    </div>
+
+    <!-- Canvas particles -->
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <!-- Background layers -->
+    <div class="bg">
+        <div class="bg__grid"></div>
+        <div class="bg__noise"></div>
+        <div class="blob blob--a"></div>
+        <div class="blob blob--b"></div>
+        <div class="blob blob--c"></div>
+    </div>
+
+    <!-- Cursor glow -->
+    <div class="cursor" aria-hidden="true"></div>
+
     <!-- Header -->
-    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-sm dark:bg-gray-900/90 shadow-sm transition-colors duration-300" id="header">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary dark:text-secondary">Wajahati</a>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link hover:text-primary dark:hover:text-secondary transition">Home</a>
-                <a href="#about" class="nav-link hover:text-primary dark:hover:text-secondary transition">About</a>
-                <a href="#experience" class="nav-link hover:text-primary dark:hover:text-secondary transition">Experience</a>
-                <a href="#skills" class="nav-link hover:text-primary dark:hover:text-secondary transition">Skills</a>
-                <a href="#projects" class="nav-link hover:text-primary dark:hover:text-secondary transition">Projects</a>
-                <a href="#contact" class="nav-link hover:text-primary dark:hover:text-secondary transition">Contact</a>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="uil uil-moon text-xl dark:hidden"></i>
-                    <i class="uil uil-sun text-xl hidden dark:block"></i>
-                </button>
-                <button id="menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="uil uil-bars text-xl"></i>
-                </button>
-            </div>
+    <header class="header">
+        <a class="brand" href="#top">
+            <span class="brand__dot"></span>
+            <span class="brand__text">Wajahat Ahmad</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+            <a href="#about" class="nav__link">About</a>
+            <a href="#skills" class="nav__link">Skills</a>
+            <a href="#projects" class="nav__link">Projects</a>
+            <a href="#journey" class="nav__link">Journey</a>
+            <a href="#contact" class="nav__link">Contact</a>
         </nav>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
-            <div class="flex flex-col py-4">
-                <a href="#home" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Home</a>
-                <a href="#about" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">About</a>
-                <a href="#experience" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Experience</a>
-                <a href="#skills" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Skills</a>
-                <a href="#projects" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Projects</a>
-                <a href="#contact" class="nav-link-mobile py-3 px-6 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
-            </div>
-        </div>
+
+        <button class="iconbtn" id="themeToggle" aria-label="Toggle theme">
+      <span class="iconbtn__sun">☼</span>
+      <span class="iconbtn__moon">☾</span>
+    </button>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen pt-32 pb-16 flex items-center">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi<span class="wave">👋</span>, I'm Wajahat Ahmad</h1>
-                <div class="text-xl md:text-2xl mb-6">
-                    <span>I'm a </span>
-                    <span id="typed-text" class="font-bold text-primary dark:text-secondary"></span>
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero__content">
+                <div class="pill reveal">
+                    <span class="pill__pulse"></span>
+                    <span>Software Engineer • Backend Developer</span>
                 </div>
-                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl">
-                    Software Engineer specializing in distributed systems, full-stack development, and creating solutions that scale.
+
+                <h1 class="hero__title reveal">
+                    I build <span class="grad">reliable</span> systems with<br>
+                    <span class="type" data-type='["APIs","Microservices","Distributed Systems","Data Pipelines","Cloud Backends"]'></span>
+                </h1>
+                <p class="hero__subtitle reveal">
+                    Software Engineer specializing in distributed systems, full-stack development, and creating solutions that scale. Currently pursuing a Master's in Computer Science at <b>UCLouvain</b>, Belgium.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <a href="#contact" class="px-8 py-3 bg-primary hover:bg-indigo-700 text-white font-medium rounded-full shadow-lg transition flex items-center justify-center gap-2">
-                        <i class="uil uil-message"></i> Contact Me
+
+                <div class="hero__cta reveal">
+                    <a class="btn magnetic" href="#projects">
+                        <span class="btn__bg"></span>
+                        <span class="btn__text">View Projects</span>
+                        <span class="btn__icon">↳</span>
                     </a>
-                    <a href="#projects" class="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-full shadow-lg transition flex items-center justify-center gap-2">
-                        <i class="uil uil-scenery"></i> View Projects
+
+                    <a class="btn btn--ghost magnetic" href="#contact">
+                        <span class="btn__text">Let’s Talk</span>
+                        <span class="btn__icon">✦</span>
                     </a>
+
+                    <a class="link" href="#" id="resumeLink" target="_blank" rel="noreferrer">
+            Download Resume <span class="link__arr">→</span>
+          </a>
                 </div>
-                <div class="mt-10 flex justify-center md:justify-start gap-6">
-                    <a href="https://github.com/wajahati" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
-                        <i class="uil uil-github-alt text-2xl"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/wajahati-ahmad/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
-                        <i class="uil uil-linkedin-alt text-2xl"></i>
-                    </a>
-                    <a href="" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition">
-                        <i class="uil uil-twitter-alt text-2xl"></i>
-                    </a>
+
+                <div class="stats reveal">
+                    <div class="stat">
+                        <div class="stat__num" data-count="20">0</div>
+                        <div class="stat__label">Projects</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__num" data-count="3">0</div>
+                        <div class="stat__label">Years</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__num" data-count="5">0</div>
+                        <div class="stat__label">Certificates</div>
+                    </div>
                 </div>
             </div>
-    		<div class="hidden md:flex justify-center">
-		<div class="w-80 h-80 md:w-80 md:h-80 rounded-full floating flex items-center justify-center overflow-hidden blob">
-			<div class="w-64 h-64 flex items-center justify-center shadow-2xl rounded-full overflow-hidden bg-white dark:bg-gray-800">
-				<img src="https://raw.githubusercontent.com/wajahati/Extras/main/Potfolio/profilepic.png" alt="Profile Image" class="w-full h-full object-contain" />
-			</div>
-		</div>	
-		</div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">About Me</h2>
-            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="flex justify-center">
-                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-50 h-64 md:w-55 md:h-80">
-					    <img src="https://raw.githubusercontent.com/wajahati/Extras/main/Potfolio/cartoonpic.jpg" alt="Profile Image" class="w-full h-full object-contain rounded-xl" />
-					</div>
+            <div class="hero__panel reveal">
+                <div class="glass card3d">
+                    <div class="glass__top">
+                        <div class="tag">Backend</div>
+                        <div class="tag tag--alt">Systems</div>
+                        <div class="tag tag--alt2">Cloud</div>
+                    </div>
+
+                    <div class="glass__mid">
+                        <div class="terminal">
+                            <div class="terminal__bar">
+                                <span class="dot dot--r"></span>
+                                <span class="dot dot--y"></span>
+                                <span class="dot dot--g"></span>
+                                <span class="terminal__title">production.log</span>
+                            </div>
+                            <pre class="terminal__body"><code>
+[OK] 200 GET /health 2ms
+[OK] 201 POST /api/v1/orders 18ms
+[OK] 200 GET /api/v1/orders/{id} 7ms
+[OK] 204 DELETE /cache/key 3ms
+[OK] 200 GET /metrics 5ms
+
+> Designing services that stay fast under load.
+> Observability-first. Fail gracefully. Scale safely.
+              </code></pre>
+                        </div>
+                    </div>
+
+                    <div class="glass__bot">
+                        <div class="chip">Clean Architecture</div>
+                        <div class="chip">PostgreSQL</div>
+                        <div class="chip">Redis</div>
+                        <div class="chip">Kafka</div>
+                        <div class="chip">Docker</div>
+                    </div>
+
+                    <div class="shine" aria-hidden="true"></div>
                 </div>
-                
-                <div>
-                    <h3 class="text-2xl font-semibold mb-4">Wajahat Ahmad</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">
-                        Software Engineer specializing in distributed systems and full-stack development, passionate about building scalable and efficient solutions. Currently pursuing a Master's in Computer Science at UCLouvain, Belgium.
+            </div>
+
+            <a class="scrollhint" href="#about" aria-label="Scroll to About">
+                <span class="scrollhint__mouse"></span>
+                <span class="scrollhint__text">Scroll</span>
+            </a>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="section">
+            <div class="section__head reveal">
+                <h2>About</h2>
+                <p>Software Engineer specializing in distributed systems and full-stack development</p>
+            </div>
+
+            <div class="about">
+                <div class="about__bio glass reveal">
+                    <h3>Backend engineer with a systems mindset.</h3>
+                    <p>
+                        I'm a software engineer focused on building robust backends — scalable APIs, microservices, data layers, and infrastructure-friendly architectures. Currently pursuing a Master's in Computer Science at
+                        <b>UCLouvain</b>, Belgium. I enjoy solving performance bottlenecks, designing clean abstractions, and making systems observable and dependable.
                     </p>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
-                            <div class="text-3xl font-bold text-primary dark:text-secondary">3+</div>
-                            <div class="text-gray-500 dark:text-gray-400">Years Experience</div>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
-                            <div class="text-3xl font-bold text-primary dark:text-secondary">20+</div>
-                            <div class="text-gray-500 dark:text-gray-400">Projects</div>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-sm">
-                            <div class="text-3xl font-bold text-primary dark:text-secondary">5</div>
-                            <div class="text-gray-500 dark:text-gray-400">Certificates</div>
-                        </div>
-                    </div>
-                    <a href="#" class="inline-flex items-center px-6 py-3 bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 text-white rounded-full transition font-medium shadow">
-                        <i class="uil uil-download-alt mr-2"></i> Download CV
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Experience & Education -->
-    <section id="experience" class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Experience & Education</h2>
-            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
-            
-			
-			
-            <div class="max-w-4xl mx-auto space-y-12">
-			
-			    
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-1/3 md:text-right pr-8">
-                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2024 - Present</span>
-                        <div class="text-lg font-bold mt-2">UCLouvain</div>
-                    </div>
-                    <div class="md:w-2/3 mt-4 md:mt-0">
-                        <h3 class="text-xl font-bold">Masters in Computer Science</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-300">
-                            Majoring in Software Engineering and Artificial Intelligence. Currently pursuing advanced studies in distributed computing and machine learning.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-1/3 md:text-right pr-8">
-                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2023 - 2024</span>
-                        <div class="text-lg font-bold mt-2">Alachisoft</div>
-                    </div>
-                    <div class="md:w-2/3 mt-4 md:mt-0">
-                        <h3 class="text-xl font-bold">Software Engineer</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-300">
-                            Developed a Pub/Sub messaging system architecture similar to Apache Kafka, integrated with NCache's in-memory distributed cluster.
-                            Implemented client-server features like message publishing and polling, ensuring stability in distributed caching.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-3">
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">C#</span>
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">.NET</span>
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Apache Kafka</span>
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Distributed Systems</span>
+                    <div class="about__highlights">
+                        <div class="mini">
+                            <div class="mini__k">Focus</div>
+                            <div class="mini__v">APIs • Distributed Systems • Databases</div>
+                        </div>
+                        <div class="mini">
+                            <div class="mini__k">Values</div>
+                            <div class="mini__v">Reliability • Security • Simplicity</div>
+                        </div>
+                        <div class="mini">
+                            <div class="mini__k">Now</div>
+                            <div class="mini__v">Master’s @ KU Leuven</div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-1/3 md:text-right pr-8">
-                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2022</span>
-                        <div class="text-lg font-bold mt-2">RadicalX</div>
+
+                <div class="about__tiles reveal">
+                    <div class="tile glass">
+                        <div class="tile__icon">⚙</div>
+                        <div class="tile__title">Architecture</div>
+                        <div class="tile__text">Design services that are modular, testable, and easy to evolve.</div>
                     </div>
-                    <div class="md:w-2/3 mt-4 md:mt-0">
-                        <h3 class="text-xl font-bold">Product Development Intern</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-300">
-                            Developed and integrated a frontend extension using React, improving the RadicalX website's user interface.
-                            Built and optimized backend infrastructure using Firebase for scalable data storage.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-3">
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">React</span>
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Firebase</span>
-                            <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Machine Learning</span>
-                        </div>
+
+                    <div class="tile glass">
+                        <div class="tile__icon">📈</div>
+                        <div class="tile__title">Performance</div>
+                        <div class="tile__text">Measure, tune, and scale: caching, indexes, async, queueing.</div>
                     </div>
-                </div>
-          
-                
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-1/3 md:text-right pr-8">
-                        <span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary dark:bg-secondary/10 dark:text-secondary text-sm font-medium">2019 - 2023</span>
-                        <div class="text-lg font-bold mt-2">COMSATS University</div>
+
+                    <div class="tile glass">
+                        <div class="tile__icon">🔒</div>
+                        <div class="tile__title">Security</div>
+                        <div class="tile__text">Auth, rate limits, input validation, secrets, least privilege.</div>
                     </div>
-                    <div class="md:w-2/3 mt-4 md:mt-0">
-                        <h3 class="text-xl font-bold">BSc in Computer Science</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-300">
-                            Bachelor of Science in Computer Science with a focus on software development and database systems. 
-                            Completed coursework in algorithms, data structures, web development, and computer networks.
-                        </p>
+
+                    <div class="tile glass">
+                        <div class="tile__icon">🔭</div>
+                        <div class="tile__title">Observability</div>
+                        <div class="tile__text">Metrics, traces, logs — because production is the real test.</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Technical Skills</h2>
-            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
-            
-            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <i class="uil uil-brackets-curly text-primary dark:text-secondary text-xl mr-3"></i>
-                        <h3 class="text-xl font-bold">Frontend Development</h3>
-                    </div>
-                    <div class="space-y-5">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>HTML/CSS</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>JavaScript</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>React</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:80%"></div>
-                            </div>
-                        </div>
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+            <div class="section__head reveal">
+                <h2>Skills</h2>
+                <p>Technical expertise across frontend, backend, databases, and DevOps tools.</p>
+            </div>
+
+            <div class="skills glass reveal">
+                <div class="skills__group">
+                    <h3>Backend</h3>
+                    <div class="chips">
+                        <button class="chipbtn" data-pop="REST, gRPC, OpenAPI, Auth, Rate limiting">APIs</button>
+                        <button class="chipbtn" data-pop="Service boundaries, DDD, Clean arch">Microservices</button>
+                        <button class="chipbtn" data-pop="Queues, streaming, retries, idempotency">Async</button>
+                        <button class="chipbtn" data-pop="JWT, OAuth2, RBAC, OWASP">Security</button>
                     </div>
                 </div>
-                
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <i class="uil uil-server-network text-primary dark:text-secondary text-xl mr-3"></i>
-                        <h3 class="text-xl font-bold">Backend Development</h3>
-                    </div>
-                    <div class="space-y-5">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>C#/.NET</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>Python</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>Node.js</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:75%"></div>
-                            </div>
-                        </div>
+
+                <div class="skills__group">
+                    <h3>Data</h3>
+                    <div class="chips">
+                        <button class="chipbtn" data-pop="Indexes, transactions, query tuning">PostgreSQL</button>
+                        <button class="chipbtn" data-pop="Caching, TTLs, pub/sub">Redis</button>
+                        <button class="chipbtn" data-pop="Streams, consumers, partitions">Kafka</button>
+                        <button class="chipbtn" data-pop="Migrations, replication, backups">DB Ops</button>
                     </div>
                 </div>
-                
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <i class="uil uil-database text-primary dark:text-secondary text-xl mr-3"></i>
-                        <h3 class="text-xl font-bold">Databases</h3>
-                    </div>
-                    <div class="space-y-5">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>MySQL</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>MongoDB</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:80%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>Firebase</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:75%"></div>
-                            </div>
-                        </div>
+
+                <div class="skills__group">
+                    <h3>Infra</h3>
+                    <div class="chips">
+                        <button class="chipbtn" data-pop="Images, compose, build optimizations">Docker</button>
+                        <button class="chipbtn" data-pop="Deployments, services, autoscaling">Kubernetes</button>
+                        <button class="chipbtn" data-pop="Dashboards, alerting">Monitoring</button>
+                        <button class="chipbtn" data-pop="CI pipelines, tests, releases">CI/CD</button>
                     </div>
                 </div>
-                
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <i class="uil uil-clouds text-primary dark:text-secondary text-xl mr-3"></i>
-                        <h3 class="text-xl font-bold">DevOps & Others</h3>
+
+                <div class="popover" id="popover" role="dialog" aria-hidden="true">
+                    <div class="popover__title" id="popTitle">Skill</div>
+                    <div class="popover__body" id="popBody">Details</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="section">
+            <div class="section__head reveal">
+                <h2>Projects</h2>
+                <p>Featured work demonstrating expertise in distributed systems and full-stack development.</p>
+            </div>
+
+            <div class="grid">
+                <article class="project card3d glass reveal">
+                    <div class="project__top">
+                        <h3>Pub/Sub Messaging System</h3>
+                        <span class="badge">Kafka</span>
                     </div>
-                    <div class="space-y-5">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>Docker</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:70%"></div>
-                            </div>
+                    <p>
+                        Implementation of a Pub/Sub messaging architecture similar to Apache Kafka, integrated with NCache's in-memory distributed cache.
+                    </p>
+                    <ul class="bullets">
+                        <li>Client-server messaging with publish and polling features</li>
+                        <li>Integration with distributed caching cluster</li>
+                        <li>Ensured stability in distributed systems</li>
+                    </ul>
+                    <div class="project__links">
+                        <a class="plink" href="#" target="_blank" rel="noreferrer">@Alachisoft</a>
+                        <a class="plink" href="#" target="_blank" rel="noreferrer">2023-2024</a>
+                    </div>
+                    <div class="shine" aria-hidden="true"></div>
+                </article>
+
+                <article class="project card3d glass reveal">
+                    <div class="project__top">
+                        <h3>ZAROORAT</h3>
+                        <span class="badge badge--alt">React Native</span>
+                    </div>
+                    <p>
+                        Mobile commerce app with in-app messaging, machine learning for category prediction, price suggestions, and profanity filtering.
+                    </p>
+                    <ul class="bullets">
+                        <li>Built with React Native and Firebase backend</li>
+                        <li>ML-powered category prediction and price suggestions</li>
+                        <li>Real-time messaging and profanity filtering</li>
+                    </ul>
+                    <div class="project__links">
+                        <a class="plink" href="https://github.com/wajahati/ZAROORAT-React-Native-Firebase" target="_blank" rel="noreferrer">GitHub</a>
+                        <a class="plink" href="#" target="_blank" rel="noreferrer">@COMSATS</a>
+                    </div>
+                    <div class="shine" aria-hidden="true"></div>
+                </article>
+
+                <article class="project card3d glass reveal">
+                    <div class="project__top">
+                        <h3>EcoGuide</h3>
+                        <span class="badge badge--alt2">Vector DB</span>
+                    </div>
+                    <p>
+                        Search feature with basic functionality and advanced system using vector databases for semantic queries.
+                    </p>
+                    <ul class="bullets">
+                        <li>Built with .NET and MongoDB</li>
+                        <li>Vector database integration for semantic search</li>
+                        <li>Advanced query capabilities</li>
+                    </ul>
+                    <div class="project__links">
+                        <a class="plink" href="#" target="_blank" rel="noreferrer">GitHub</a>
+                        <a class="plink" href="#" target="_blank" rel="noreferrer">@UCLouvain</a>
+                    </div>
+                    <div class="shine" aria-hidden="true"></div>
+                </article>
+            </div>
+        </section>
+
+        <!-- JOURNEY -->
+        <section id="journey" class="section">
+            <div class="section__head reveal">
+                <h2>Journey</h2>
+                <p>Education and professional experience in software engineering.</p>
+            </div>
+
+            <div class="timeline glass reveal">
+                <div class="titem">
+                    <div class="titem__dot"></div>
+                    <div class="titem__content">
+                        <div class="titem__top">
+                            <h3>Master's in Computer Science — UCLouvain</h3>
+                            <span class="titem__time">2024 – Present</span>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>CI/CD</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:65%"></div>
-                            </div>
+                        <p>Majoring in Software Engineering and Artificial Intelligence. Focus areas: distributed systems, data engineering, security, software architecture.</p>
+                    </div>
+                </div>
+
+                <div class="titem">
+                    <div class="titem__dot"></div>
+                    <div class="titem__content">
+                        <div class="titem__top">
+                            <h3>Software Engineer — Alachisoft</h3>
+                            <span class="titem__time">2023 – 2024</span>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span>Git</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width:90%"></div>
-                            </div>
+                        <p>Developed Pub/Sub messaging system architecture integrated with NCache's distributed cluster. Implemented client-server features ensuring stability in distributed caching.</p>
+                    </div>
+                </div>
+
+                <div class="titem">
+                    <div class="titem__dot"></div>
+                    <div class="titem__content">
+                        <div class="titem__top">
+                            <h3>Product Development Intern — RadicalX</h3>
+                            <span class="titem__time">2022</span>
                         </div>
+                        <p>Developed React frontend extension and optimized Firebase backend infrastructure for scalable data storage.</p>
+                    </div>
+                </div>
+
+                <div class="titem">
+                    <div class="titem__dot"></div>
+                    <div class="titem__content">
+                        <div class="titem__top">
+                            <h3>BSc in Computer Science — COMSATS University</h3>
+                            <span class="titem__time">2019 – 2023</span>
+                        </div>
+                        <p>Bachelor of Science in Computer Science with focus on software development, algorithms, and database systems.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-      <!-- Projects Section -->
-    <section id="projects" class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Projects</h2>
-            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
-            
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-				
-					<div class="swiper-slide">
-						<div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
-							<!-- Image container -->
-							<div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-								<img src="https://raw.githubusercontent.com/wajahati/Extras/refs/heads/main/Potfolio/pubsub7.png" alt="PubSub Messaging preview"
-									 class=" w-full h-full" />
-							</div>
-							<div class="p-6">
-								<h3 class="text-xl font-bold mb-2">Pub/Sub Messaging System</h3>
-								<p class="text-gray-600 dark:text-gray-300 mb-4">
-									Implementation a Pub/Sub messaging architecture similar to Apache Kafka, integrated with NCache's in-memory distributed cache.
-								</p>
-								<div class="flex flex-wrap gap-2 mb-4">
-									<span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">C#</span>
-									<span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">.NET</span>
-									<span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Apache Kafka</span>
-									<span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Distributed Systems</span>
-								</div>
-								<div class="flex justify-between">
-									<span class="text-primary dark:text-secondary font-medium">
-										<i class="uil uil-building mr-1"></i> @Alachisoft
-									</span>
-									<span class="text-primary dark:text-secondary font-medium">
-										<i class="uil uil-calendar-alt mr-1"></i> 2023 – 2024
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-                    <div class="swiper-slide">
-                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
-                            <!-- Image container -->
-							<div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-							  <img src="https://raw.githubusercontent.com/wajahati/Extras/refs/heads/main/Potfolio/ZAROORAT.png" alt="EcoGuide preview"
-								   class="object-cover w-full h-full" />
-							</div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">ZAROORAT</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                    Mobile commerce app with in-app messaging, machine learning for category prediction, price suggestions, and profanity filtering.
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">React Native</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Python</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">FastAPI</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Firebase</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-primary dark:text-secondary font-medium">
-										<i class="uil uil-building mr-1"></i> @COMSATS
-									</span>
-                                    <a href="https://github.com/wajahati/ZAROORAT-React-Native-Firebase" class="text-primary dark:text-secondary font-medium hover:underline">
-                                        <i class="uil uil-github mr-1"></i> Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="swiper-slide">
-                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
-                            <!-- Image container -->
-							<div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-							  <img src="https://raw.githubusercontent.com/wajahati/Extras/refs/heads/main/Potfolio/ecoguide.png" alt="EcoGuide preview"
-								   class="w-full h-full" />
-							</div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">EcoGuide</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                    Search feature with basic functionality and advanced system using vector databases for semantic queries.
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">.NET</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">MongoDB</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Vector DB</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-primary dark:text-secondary font-medium">
-										<i class="uil uil-building mr-1"></i> @UCLouvain
-									</span>
-                                    <a href="#" class="text-primary dark:text-secondary font-medium hover:underline">
-                                        <i class="uil uil-github mr-1"></i> Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="swiper-slide">
-                        <div class="max-w-md bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg mx-auto">
-                            <!-- Image container -->
-							<div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-							  <img src="https://raw.githubusercontent.com/wajahati/Extras/refs/heads/main/Potfolio/Sticker.pk.png" alt="Sticker.pk preview"
-								   class=" w-full h-full" />
-							</div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">STICKER.pk</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">
-                                    E-commerce platform with category-based search, shopping cart, and admin panel for advertisement management.
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">PHP</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">Laravel</span>
-                                    <span class="text-xs px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30">MySQL</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-primary dark:text-secondary font-medium">
-										<i class="uil uil-building mr-1"></i> @COMSATS
-									</span>
-                                    <a href="https://github.com/wajahati/STICKERS.pk" class="text-primary dark:text-secondary font-medium hover:underline">
-                                        <i class="uil uil-github mr-1"></i> Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+            <div class="section__head reveal">
+                <h2>Contact</h2>
+                <p>Let's connect and build something great together.</p>
             </div>
-        </div>
-    </section>
 
+            <div class="contact">
+                <div class="contact__left glass reveal">
+                    <h3>Let’s build something that doesn’t break in production.</h3>
+                    <p>
+                        Feel free to reach out for collaborations or opportunities:
+                    </p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In Touch</h2>
-            <div class="w-24 h-1 bg-primary dark:bg-secondary mx-auto mb-16"></div>
-            
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="uil uil-envelope text-primary dark:text-secondary text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-medium">Email</h4>
-                                <p class="text-gray-600 dark:text-gray-300">ahmadwajahat312@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex">
-								<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-									<a href="https://www.linkedin.com/in/wajahati-ahmad/" class="hover:text-white transition">			
-										<i class="uil uil-linkedin-alt text-primary dark:text-secondary text-xl"></i>
-									</a>								
-								</div>
-								<div class="ml-4">
-									<h4 class="font-medium">LinkedIn</h4>
-									<p class="text-gray-600 dark:text-gray-300">linkedin.com/in/wajahati-ahmad/</p>
-								</div>
-                        </div>
-                        
-                        <div class="flex">
-								<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-									<a href="https://github.com/wajahati" class="hover:text-white transition">
-										<i class="uil uil-github text-primary dark:text-secondary text-xl"></i>			
-									</a>
-								</div>
-								<div class="ml-4">
-									<h4 class="font-medium">GitHub</h4>
-									<p class="text-gray-600 dark:text-gray-300">github.com/wajahati</p>
-								</div>
-                        </div>
-                        
-                        <div class="flex">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="uil uil-map-marker text-primary dark:text-secondary text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-medium">Location</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Belgium</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-10">
-                       <h4 class="text-lg font-medium mb-4">Follow Me</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
-                                <i class="uil uil-twitter-alt text-xl"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
-                                <i class="uil uil-instagram text-xl"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
-                                <i class="uil uil-dribbble text-xl"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-700 shadow-md hover:shadow-lg transition">
-                                <i class="uil uil-youtube text-xl"></i>
-                            </a>
-                        </div>
+                    <div class="contact__links">
+                        <a class="clink magnetic" href="mailto:ahmadwajahat312@gmail.com">
+                            <span>Email</span><span class="muted">ahmadwajahat312@gmail.com</span>
+                        </a>
+                        <a class="clink magnetic" href="https://github.com/wajahati" target="_blank" rel="noreferrer">
+                            <span>GitHub</span><span class="muted">github.com/wajahati</span>
+                        </a>
+                        <a class="clink magnetic" href="https://www.linkedin.com/in/wajahati-ahmad/" target="_blank" rel="noreferrer">
+                            <span>LinkedIn</span><span class="muted">linkedin.com/in/wajahati-ahmad</span>
+                        </a>
                     </div>
                 </div>
-                
-                <div>
-                    <form class="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm">
-                        <h3 class="text-xl font-bold mb-4">Send a Message</h3>
-                        
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1" for="name">Full Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1" for="subject">Subject</label>
-                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1" for="message">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg focus:ring-primary focus:border-primary"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full py-3 bg-primary hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition flex items-center justify-center gap-2">
-                            <i class="uil uil-message"></i> Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-10 bg-gray-800 dark:bg-gray-900 text-gray-400">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="text-2xl font-bold text-white">Wajahat Ahmad</div>
-                    <p class="mt-2">Software Engineer & Full-Stack Developer</p>
-                </div>
-                
-                <div class="flex space-x-4">
-                    <a href="#" class="hover:text-white transition">
-                        <i class="uil uil-twitter-alt text-xl"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/wajahati-ahmad/" class="hover:text-white transition">
-                        <i class="uil uil-linkedin-alt text-xl"></i>
-                    </a>
-                    <a href="https://github.com/wajahati" class="hover:text-white transition">
-                        <i class="uil uil-github-alt text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-white transition">
-                        <i class="uil uil-instagram text-xl"></i>
-                    </a>
-                </div>
+                <form class="contact__right glass reveal" id="contactForm">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" placeholder="Jane Doe" required />
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" placeholder="jane@email.com" required />
+                    </div>
+                    <div class="field">
+                        <label for="msg">Message</label>
+                        <textarea id="msg" name="msg" placeholder="What are we building?" rows="5" required></textarea>
+                    </div>
+
+                    <button class="btn magnetic" type="submit">
+            <span class="btn__bg"></span>
+            <span class="btn__text">Send Message</span>
+            <span class="btn__icon">✉</span>
+          </button>
+
+                    <p class="formnote muted">
+                        This demo form shows a fancy success animation. Wire it to Formspree / your backend later.
+                    </p>
+                </form>
             </div>
-            
-            <div class="border-t border-gray-700 mt-10 pt-6 text-center">
-                <p>&copy; 2025 Wajahat Ahmad. All rights reserved.</p>
-            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <span>© <span id="year"></span> Wajahat Ahmad</span>
+            <span class="muted">Built with HTML • CSS • JS</span>
         </div>
     </footer>
 
-    <!-- Scroll to Top -->
-    <a href="#" id="scroll-top" class="fixed right-8 bottom-8 w-12 h-12 rounded-full bg-primary dark:bg-secondary flex items-center justify-center text-white shadow-lg opacity-0 invisible transition-all">
-        <i class="uil uil-arrow-up text-xl"></i>
-    </a>
-
-    <script>
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Swiper
-            const swiper = new Swiper(".mySwiper", {
-                slidesPerView: 1,
-                spaceBetween: 30,
-                loop: true,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 2,
-                    }
-                }
-            });
-            
-            // Initialize AOS
-            AOS.init({
-                duration: 800,
-                once: true
-            });
-            
-            // Theme Toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            if (localStorage.getItem('dark') === 'true') {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('dark', 'true');
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-                localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
-            });
-            
-            // Mobile Menu Toggle
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            menuToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-link-mobile').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-            
-            // Scroll to top button
-            const scrollTopBtn = document.getElementById('scroll-top');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    scrollTopBtn.classList.remove('opacity-0', 'invisible');
-                    scrollTopBtn.classList.add('opacity-100', 'visible');
-                } else {
-                    scrollTopBtn.classList.add('opacity-0', 'invisible');
-                    scrollTopBtn.classList.remove('opacity-100', 'visible');
-                }
-            });
-            
-            // Set active nav link on scroll
-            window.addEventListener('scroll', setActiveNavLink);
-            
-            function setActiveNavLink() {
-                const sections = document.querySelectorAll('section');
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (scrollY >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
-                    link.classList.remove('text-primary', 'dark:text-secondary', 'font-medium');
-                    if (link.getAttribute('href').substring(1) === current) {
-                        link.classList.add('text-primary', 'dark:text-secondary', 'font-medium');
-                    }
-                });
-            }
-            
-            // Set progress bar widths
-            document.querySelectorAll('.progress-fill').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 300);
-            });
-            
-            // Initialize typed.js effect
-            const typedText = document.getElementById('typed-text');
-            let roles = ['Software Engineer', 'Full-Stack Developer', 'Distributed Systems Expert', 'Problem Solver'];
-            let currentRoleIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            
-            function typeEffect() {
-                const currentText = roles[currentRoleIndex];
-                
-                if (!isDeleting) {
-                    typedText.textContent = currentText.substring(0, charIndex++);
-                    if (charIndex > currentText.length) {
-                        isDeleting = true;
-                        setTimeout(typeEffect, 1500);
-                        return;
-                    }
-                } else {
-                    typedText.textContent = currentText.substring(0, charIndex--);
-                    if (charIndex === 0) {
-                        isDeleting = false;
-                        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-                    }
-                }
-                
-                setTimeout(typeEffect, isDeleting ? 50 : 150);
-            }
-            
-            typeEffect();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
