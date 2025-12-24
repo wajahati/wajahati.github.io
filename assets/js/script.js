@@ -188,7 +188,7 @@ $$('a[href^="#"]').forEach(a => {
             const x = e.clientX - (r.left + r.width / 2);
             const y = e.clientY - (r.top + r.height / 2);
             const strength = btn.classList.contains("btn") ? 0.18 : 0.12;
-            btn.style.transform = `translate3d(${x*strength}px, ${y*strength}px, 0)`;
+            btn.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
         });
         btn.addEventListener("pointerleave", () => {
             btn.style.transform = "translate3d(0,0,0)";
@@ -207,8 +207,8 @@ $$('a[href^="#"]').forEach(a => {
             const rx = (py - 0.5) * -10; // rotateX
             const ry = (px - 0.5) * 12; // rotateY
             card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-1px)`;
-            card.style.setProperty("--mx", `${px*100}%`);
-            card.style.setProperty("--my", `${py*100}%`);
+            card.style.setProperty("--mx", `${px * 100}%`);
+            card.style.setProperty("--my", `${py * 100}%`);
         });
         card.addEventListener("pointerleave", () => {
             card.style.transform = "";
@@ -243,49 +243,132 @@ $$('a[href^="#"]').forEach(a => {
     });
 })();
 
-/* ========= Contact form (demo success animation) ========= */
+/* ========= Contact form (Real Submission) ========= */
 (() => {
     const form = $("#contactForm");
+    const statusMsg = $("#formStatus");
     if (!form) return;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // fun success effect: temporary button morph
+        // 1. Honeypot check (bot trap)
+        const honey = form.querySelector('input[name="_gotcha"]');
+        if (honey && honey.value) {
+            console.log("Bot detected.");
+            return; // silent fail
+        }
+
         const btn = form.querySelector("button[type='submit']");
         const txt = btn.querySelector(".btn__text");
         const ico = btn.querySelector(".btn__icon");
+        const originalText = txt.textContent;
+
+        // UI: Sending state
         btn.disabled = true;
+        txt.textContent = "Sending...";
 
-        const oldTxt = txt.textContent;
-        txt.textContent = "Sent!";
-        ico.textContent = "✓";
+        // 2. Obfuscate ID: "mwvezkyp"
+        const p1 = "mwv";
+        const p2 = "ezk";
+        const p3 = "yp";
+        const endpoint = `https://formspree.io/f/${p1}${p2}${p3}`;
 
-        btn.style.transform = "translateY(-1px) scale(1.02)";
-        btn.style.borderColor = "rgba(0,255,178,.35)";
+        // 3. Collect Data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-        setTimeout(() => {
+        try {
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                // Success Animation
+                txt.textContent = "Sent!";
+                ico.textContent = "✓";
+                btn.style.transform = "translateY(-1px) scale(1.02)";
+                btn.style.borderColor = "rgba(0,255,178,.35)";
+
+                if (statusMsg) {
+                    statusMsg.textContent = "Thanks! Message sent.";
+                    statusMsg.style.color = "var(--color-accent)";
+                }
+
+                form.reset();
+
+                // Reset button after delay
+                setTimeout(() => {
+                    btn.disabled = false;
+                    txt.textContent = originalText;
+                    ico.textContent = "✉";
+                    btn.style.transform = "";
+                    btn.style.borderColor = "";
+                    if (statusMsg) statusMsg.textContent = "";
+                }, 3000);
+            } else {
+                const json = await res.json();
+                if (statusMsg) {
+                    statusMsg.textContent = (json.errors && json.errors.map(err => err.message).join(", ")) || "Oops! Submission failed.";
+                    statusMsg.style.color = "#ff4d4d";
+                }
+                btn.disabled = false;
+                txt.textContent = originalText;
+            }
+        } catch (err) {
+            if (statusMsg) {
+                statusMsg.textContent = "Error: Could not send message.";
+                statusMsg.style.color = "#ff4d4d";
+            }
             btn.disabled = false;
-            txt.textContent = oldTxt;
-            ico.textContent = "✉";
-            btn.style.transform = "";
-            btn.style.borderColor = "";
-            form.reset();
-        }, 1600);
+            txt.textContent = originalText;
+        }
     });
+})();
+
+/* ========= Contact Privacy ========= */
+(() => {
+    const emailLink = document.getElementById('emailLink');
+    const emailText = document.getElementById('emailText');
+    const phoneLink = document.getElementById('phoneLink');
+    const phoneText = document.getElementById('phoneText');
+
+    if (emailLink) {
+        emailLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = 'ahmadwajahat312';
+            const domain = 'gmail.com';
+            const email = `${user}@${domain}`;
+            emailLink.href = `mailto:${email}`;
+            emailText.textContent = email;
+            emailText.classList.remove('muted');
+        });
+    }
+
+    if (phoneLink) {
+        phoneLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const p = '+32 465 335173'; // Wajahat's phone
+            phoneLink.href = `tel:${p.replace(/\s/g, '')}`;
+            phoneText.textContent = p;
+            phoneText.classList.remove('muted');
+        });
+    }
 })();
 
 /* ========= Resume link placeholder ========= */
 (() => {
     // Put your resume file URL here when you have it:
     // e.g. "assets/YourName-Resume.pdf"
-    const resumeUrl = "";
+    const resumeUrl = "https://www.linkedin.com/in/wajahati-ahmad/overlay/1760459369925/single-media-viewer/?profileId=ACoAADJB3P0BxeeH4qM5MNv_HHy7Tk_fhh8mK5k";
     const a = $("#resumeLink");
     if (!a) return;
     if (!resumeUrl) {
         a.addEventListener("click", (e) => {
             e.preventDefault();
-            alert("Add your resume URL in script.js (resumeUrl).");
+            alert("Add your resume URL in assets/js/script.js (resumeUrl).");
         });
     } else {
         a.href = resumeUrl;
